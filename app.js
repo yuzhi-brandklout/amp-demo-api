@@ -11,6 +11,7 @@ const cors = require('cors')({
 app.use(cors);
 
 const json = (req, res) => {
+  res.setHeader('AMP-Email-Allow-Sender', '*');
   res.json({ now: new Date().toString() });
 };
 app.use('/json', json);
