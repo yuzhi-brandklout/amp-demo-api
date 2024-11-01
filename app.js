@@ -10,13 +10,37 @@ const cors = require('cors')({
 });
 app.use(cors);
 
-const json = (req, res) => {
+const ampCors = (req, res, next) => {
   res.setHeader('AMP-Email-Allow-Sender', '*');
-  res.setHeader('AMP-Access-Control-Allow-Source-Origin', req.query['__amp_source_origin']);
   res.setHeader('Access-Control-Expose-Headers', 'AMP-Access-Control-Allow-Source-Origin');
 
-  res.json({ now: new Date().toString() });
+  if (req.query['__amp_source_origin']) {
+    res.setHeader('AMP-Access-Control-Allow-Source-Origin', req.query['__amp_source_origin']);
+  }
+
+  next();
 };
-app.use('/json', json);
+
+app.use(json);
+
+app.post('/json', (req, res, next) => {
+  res.status(200).json({});
+});
+
+app.post('/200', (req, res, next) => {
+  res.status(200).json({});
+});
+
+app.post('/201', (req, res, next) => {
+  res.status(201).json({});
+});
+
+app.post('/202', (req, res, next) => {
+  res.status(201).json({});
+});
+
+app.post('/403', (req, res, next) => {
+  res.status(403).json({ reason: 'Here is the reason!', });
+});
 
 app.listen(process.env.PORT || 3000);
