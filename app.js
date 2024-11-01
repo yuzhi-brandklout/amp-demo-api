@@ -8,6 +8,7 @@ const cors = require('cors')({
   origin: (origin, callback) => callback(null, origin),
   credentials: true,
 });
+
 app.use(cors);
 
 const ampCors = (req, res, next) => {
@@ -21,7 +22,7 @@ const ampCors = (req, res, next) => {
   next();
 };
 
-app.use(json);
+app.use(ampCors);
 
 app.post('/json', (req, res, next) => {
   res.status(200).json({});
