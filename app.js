@@ -24,24 +24,32 @@ const ampCors = (req, res, next) => {
 
 app.use(ampCors);
 
-app.post('/json', (req, res, next) => {
-  res.status(200).json({});
+app.all('/200', (req, res, next) => {
+  res.status(200).json({ now: new Date().toLocaleString(), });
 });
 
-app.post('/200', (req, res, next) => {
-  res.status(200).json({});
+app.all('/201', (req, res, next) => {
+  res.status(201).json({ now: new Date().toLocaleString(), });
 });
 
-app.post('/201', (req, res, next) => {
-  res.status(201).json({});
+app.all('/202', (req, res, next) => {
+  res.status(202).json({ now: new Date().toLocaleString(), });
 });
 
-app.post('/202', (req, res, next) => {
-  res.status(201).json({});
+app.all('/403', (req, res, next) => {
+  res.status(403).json({ now: new Date().toLocaleString(), });
 });
 
-app.post('/403', (req, res, next) => {
-  res.status(403).json({ reason: 'Here is the reason!', });
+app.all('/404', (req, res, next) => {
+  res.status(404).json({ now: new Date().toLocaleString(), });
+});
+
+app.all('/500', (req, res, next) => {
+  res.status(500).json({ now: new Date().toLocaleString(), });
+});
+
+app.all('/503', (req, res, next) => {
+  res.status(503).json({ now: new Date().toLocaleString(), });
 });
 
 app.listen(process.env.PORT || 3000);
