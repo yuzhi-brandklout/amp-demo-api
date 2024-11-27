@@ -52,8 +52,8 @@ app.all('/503', (req, res) => {
   res.status(503).json({ now: new Date().toLocaleString(), });
 });
 
-app.all('/ai', (req, res) => {
-  const arr = req.query['prompt'];
+app.post('/ai', (req, res) => {
+  const arr = req.body['prompt'];
 
   function joined() {
     if (typeof arr === 'string') return arr;
