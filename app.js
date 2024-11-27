@@ -52,4 +52,23 @@ app.all('/503', (req, res, next) => {
   res.status(503).json({ now: new Date().toLocaleString(), });
 });
 
+router.all('/ai', (req, res) => {
+  const arr = req.query['prompt'] as string | string[];
+
+  function joined(): string {
+    if (typeof arr === 'string') return arr;
+    if (Array.isArray(arr)) return arr.join(', ');
+    return '';
+  }
+
+  if (!joined()) {
+    res.sendStatus(400);
+    return;
+  }
+
+  res.status(200).json({
+    content: `Hello World. Hello World. Hello World. Hello World. ${ joined() }`,
+  });
+});
+
 app.listen(process.env.PORT || 3000);
