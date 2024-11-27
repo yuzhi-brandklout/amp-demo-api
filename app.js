@@ -24,35 +24,35 @@ const ampCors = (req, res, next) => {
 
 app.use(ampCors);
 
-app.all('/200', (req, res, next) => {
+app.all('/200', (req, res) => {
   res.status(200).json({ now: new Date().toLocaleString(), });
 });
 
-app.all('/201', (req, res, next) => {
+app.all('/201', (req, res) => {
   res.status(201).json({ now: new Date().toLocaleString(), });
 });
 
-app.all('/202', (req, res, next) => {
+app.all('/202', (req, res) => {
   res.status(202).json({ now: new Date().toLocaleString(), });
 });
 
-app.all('/403', (req, res, next) => {
+app.all('/403', (req, res) => {
   res.status(403).json({ now: new Date().toLocaleString(), });
 });
 
-app.all('/404', (req, res, next) => {
+app.all('/404', (req, res) => {
   res.status(404).json({ now: new Date().toLocaleString(), });
 });
 
-app.all('/500', (req, res, next) => {
+app.all('/500', (req, res) => {
   res.status(500).json({ now: new Date().toLocaleString(), });
 });
 
-app.all('/503', (req, res, next) => {
+app.all('/503', (req, res) => {
   res.status(503).json({ now: new Date().toLocaleString(), });
 });
 
-router.all('/ai', (req, res) => {
+app.all('/ai', (req, res) => {
   const arr = req.query['prompt'];
 
   function joined() {
