@@ -53,9 +53,9 @@ app.all('/503', (req, res, next) => {
 });
 
 router.all('/ai', (req, res) => {
-  const arr = req.query['prompt'] as string | string[];
+  const arr = req.query['prompt'];
 
-  function joined(): string {
+  function joined() {
     if (typeof arr === 'string') return arr;
     if (Array.isArray(arr)) return arr.join(', ');
     return '';
