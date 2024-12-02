@@ -53,21 +53,22 @@ app.all('/503', (req, res) => {
 });
 
 app.post('/ai', (req, res) => {
-  const arr = req.body['prompt'];
-
-  function joined() {
-    if (typeof arr === 'string') return arr;
-    if (Array.isArray(arr)) return arr.join(', ');
-    return '';
-  }
-
-  if (!joined()) {
+  const text = req.body['text'];
+  if (text === '400') {
     res.sendStatus(400);
     return;
   }
-
+  
+  const keywords = req.body['keywords'];
+  const joined = `${ keywords.join(', ') } + ${ text }`;
+  
   res.status(200).json({
-    content: `Hello World. Hello World. Hello World. Hello World. ${ joined() }`,
+    content: [
+      // `Hello World 1 Hello World 1 ${ joined }`,
+      `Hello World 2 Hello World 2 Hello World 2 ${ joined }`,
+      `Hello World 3 Hello World 3 Hello World 3 Hello World 3 ${ joined }`,
+      `Hello World 4 Hello World 4 Hello World 4 Hello World 4 Hello World 4 ${ joined }`,
+    ],
   });
 });
 
